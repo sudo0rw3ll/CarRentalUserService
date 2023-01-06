@@ -1,6 +1,7 @@
 package com.chan.sherlock.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -8,10 +9,10 @@ public class Client extends User{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @NotNull
     private String passport_number;
-    private int rental_period;
-    @Enumerated(EnumType.ORDINAL)
-    private Status status;
+    private Integer rental_period;
 
     public String getPassport_number() {
         return passport_number;
@@ -29,11 +30,4 @@ public class Client extends User{
         this.rental_period = rental_period;
     }
 
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
 }

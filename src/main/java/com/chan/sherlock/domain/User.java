@@ -19,7 +19,7 @@ public class User {
     private LocalDate date_of_birth;
     private String first_name;
     private String last_name;
-    private int is_active;
+    private Integer is_active;
 
     @Column(name = "TYPE", insertable = false, updatable = false)
     private String type;

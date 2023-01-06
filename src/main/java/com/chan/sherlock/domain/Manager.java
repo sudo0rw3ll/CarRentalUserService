@@ -9,6 +9,7 @@ public class Manager extends User{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String company_name;
     private LocalDate date_of_hiring;
 
