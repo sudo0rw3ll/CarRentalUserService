@@ -1,22 +1,31 @@
 package com.chan.sherlock.dto;
 
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public class ClientUpdateDto {
 
-    @NotNull
+    @NotEmpty
     private String first_name;
-    @NotNull
+
+    @NotEmpty
     private String last_name;
-    @NotNull
+
+    @NotEmpty
     private String username;
-    @NotNull
+
+    @Length(min=12)
     private String password;
-    @NotNull
+
+    @NotEmpty
     private String email;
-    @NotNull
+
+    @NotEmpty
     private String phone_number;
+
     @NotNull
     private LocalDate date_of_birth;
 

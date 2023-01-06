@@ -2,8 +2,8 @@ package com.chan.sherlock.dto;
 
 public class TokenRequestDto {
 
-    private  String username;
-    private  String password;
+    private String username;
+    private String password;
 
     public TokenRequestDto(){
 

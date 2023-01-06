@@ -1,10 +1,20 @@
 package com.chan.sherlock.dto;
 
 public class ManagerDto {
+
+    private Long id;
     private String first_name;
     private String last_name;
     private String username;
     private String company_name;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getFirst_name() {
         return first_name;

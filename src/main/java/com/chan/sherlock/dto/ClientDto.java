@@ -1,11 +1,20 @@
 package com.chan.sherlock.dto;
 
 public class ClientDto {
+
+    private Long id;
     private String first_name;
     private String last_name;
     private String username;
     private String email;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;

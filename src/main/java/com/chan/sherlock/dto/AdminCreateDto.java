@@ -1,14 +1,32 @@
 package com.chan.sherlock.dto;
 
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public class AdminCreateDto {
+
+    @NotEmpty
     private String first_name;
+
+    @NotEmpty
     private String last_name;
+
+    @NotEmpty
     private String username;
+
+    @Length(min=8)
     private String password;
+
+    @NotEmpty
     private String email;
+
+    @NotEmpty
     private String phone_number;
+
+    @NotNull
     private LocalDate date_of_birth;
 
     public String getFirst_name() {

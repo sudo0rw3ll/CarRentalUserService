@@ -1,6 +1,7 @@
 package com.chan.sherlock.dto;
 
 public class TokenResponseDto {
+
     private String token;
 
     public TokenResponseDto(){

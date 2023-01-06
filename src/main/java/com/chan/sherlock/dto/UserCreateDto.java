@@ -1,15 +1,23 @@
 package com.chan.sherlock.dto;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 public class UserCreateDto {
 
+    @NotBlank
     private String first_name;
 
+    @NotBlank
     private String last_name;
 
+    @Email
     private String email;
 
+    @NotBlank
     private String username;
 
+    @NotBlank
     private String password;
 
     public String getFirst_name() {
