@@ -30,4 +30,13 @@ public class Client extends User{
         this.rental_period = rental_period;
     }
 
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

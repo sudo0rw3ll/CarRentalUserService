@@ -6,7 +6,7 @@ import com.chan.sherlock.dto.ManagerDto;
 
 public class ManagerMapper {
 
-    public ManagerDto ManagerToManagerDto (Manager manager){
+    public ManagerDto managerToManagerDto(Manager manager){
       ManagerDto managerDto=new ManagerDto();
       managerDto.setFirst_name(manager.getFirst_name());
       managerDto.setLast_name(manager.getLast_name());

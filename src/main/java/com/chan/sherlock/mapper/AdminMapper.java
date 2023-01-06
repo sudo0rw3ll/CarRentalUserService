@@ -7,13 +7,13 @@ import com.chan.sherlock.dto.AdminDto;
 public class AdminMapper {
 
     public AdminDto adminDtoToAdmin(Admin admin){
-        AdminDto adminDto=new AdminDto();
+        AdminDto adminDto = new AdminDto();
         adminDto.setUsername(admin.getUsername());
         return adminDto;
     }
 
     public Admin adminCreateDtoToAdmin(AdminCreateDto adminCreateDto){
-        Admin admin= new Admin();
+        Admin admin = new Admin();
         admin.setFirst_name(adminCreateDto.getFirst_name());
         admin.setLast_name(adminCreateDto.getLast_name());
         admin.setUsername(adminCreateDto.getUsername());

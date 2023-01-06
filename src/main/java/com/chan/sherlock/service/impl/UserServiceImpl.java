@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService {
     public ManagerDto createManager(ManagerCreateDto managerCreateDto) {
         Manager manager = managerMapper.managerCreateDtoToManager(managerCreateDto);
         userRepository.save(manager);
-        return managerMapper.ManagerToManagerDto(manager);
+        return managerMapper.managerToManagerDto(manager);
     }
 
     @Override
@@ -89,7 +89,7 @@ public class UserServiceImpl implements UserService {
         manager.setEmail(managerUpdateDto.getEmail());
         manager.setDate_of_hiring(managerUpdateDto.getDate_of_hiring());
 
-        return managerMapper.ManagerToManagerDto(userRepository.save(manager));
+        return managerMapper.managerToManagerDto(userRepository.save(manager));
     }
 
     @Override

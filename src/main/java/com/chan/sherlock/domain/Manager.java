@@ -28,4 +28,14 @@ public class Manager extends User{
     public String getCompany_name() {
         return company_name;
     }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

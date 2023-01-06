@@ -24,6 +24,11 @@ public class ClientCreateDto {
     @NotNull
     private LocalDate date_of_birth;
 
+    @NotBlank
+    private String passport_number;
+
+    private Integer rental_period;
+
     public String getFirst_name() {
         return first_name;
     }
@@ -78,5 +83,21 @@ public class ClientCreateDto {
 
     public void setDate_of_birth(LocalDate date_of_birth) {
         this.date_of_birth = date_of_birth;
+    }
+
+    public String getPassport_number() {
+        return passport_number;
+    }
+
+    public void setPassport_number(String passport_number) {
+        this.passport_number = passport_number;
+    }
+
+    public Integer getRental_period() {
+        return rental_period;
+    }
+
+    public void setRental_period(Integer rental_period) {
+        this.rental_period = rental_period;
     }
 }
