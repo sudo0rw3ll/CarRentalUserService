@@ -15,6 +15,7 @@ public class UserStatus {
     private Integer minRentalPeriod;
     private Integer maxRentalPeriod;
     private Integer discount;
+    private String status_name;
 
     public UserStatus(){
 
@@ -56,5 +57,13 @@ public class UserStatus {
 
     public void setDiscount(Integer discount) {
         this.discount = discount;
+    }
+
+    public String getStatus_name() {
+        return status_name;
+    }
+
+    public void setStatus_name(String status_name) {
+        this.status_name = status_name;
     }
 }

@@ -35,7 +35,7 @@ public class UserController {
             "Default sort order is ascending. "+
             "Multiple sort criteria are supported.")})
     @GetMapping
-    @CheckSecurity(userTypes={"ADMIN","MANAGER","USER"})
+    @CheckSecurity(userTypes={"Admin","Manager","Client"})
     public ResponseEntity<Page<UserDto>> getAllUsers(@RequestHeader("Authorization") String authorization, Pageable pageable){
         return new ResponseEntity<>(userService.findAll(pageable), HttpStatus.OK);
     }
@@ -60,16 +60,35 @@ public class UserController {
 
     @ApiOperation(value = "Update Client")
     @PutMapping("/updateClient/{id}")
-    @CheckSecurity(userTypes={"ADMIN","MANAGER","USER"})
-    public ResponseEntity<ClientDto> updateClient(@RequestBody @Valid ClientUpdateDto clientUpdateDto, @PathVariable("id") Long id){
+    @CheckSecurity(userTypes={"Client","Admin"})
+    public ResponseEntity<ClientDto> updateClient(@RequestHeader("Authorization") String authorization,
+                                                  @RequestBody @Valid ClientUpdateDto clientUpdateDto,
+                                                  @PathVariable("id") Long id){
+        System.out.println(clientUpdateDto.getPassword());
         return new ResponseEntity<>(userService.updateClient(id, clientUpdateDto), HttpStatus.OK);
     }
 
     @ApiOperation(value = "Update Manager")
     @PutMapping("/updateManager/{id}")
-    @CheckSecurity(userTypes={"ADMIN","MANAGER","USER"})
-    public ResponseEntity<ManagerDto> updateManager(@RequestBody @Valid ManagerUpdateDto managerUpdateDto, @PathVariable("id") Long id){
+    @CheckSecurity(userTypes={"Admin","Manager"})
+    public ResponseEntity<ManagerDto> updateManager(@RequestHeader("Authorization") String authorization,
+                                                    @RequestBody @Valid ManagerUpdateDto managerUpdateDto, @PathVariable("id") Long id){
         return new ResponseEntity<>(userService.updateManager(id, managerUpdateDto), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Block user")
+    @PostMapping("/blockUser/{id}")
+    @CheckSecurity(userTypes={"Admin"})
+    public ResponseEntity<UserDto> blockUser(@RequestHeader("Authorization") String authorization,
+                                             @PathVariable("id") Long id){
+        return new ResponseEntity<>(userService.blockUser(id), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Unblock user")
+    @PostMapping("/unblockUser/{id}")
+    @CheckSecurity(userTypes={"Admin"})
+    public ResponseEntity<UserDto> unblockUser(@RequestHeader("Authorization") String authorization,
+                                               @PathVariable("id") Long id){
+        return new ResponseEntity<>(userService.unblockUser(id), HttpStatus.OK);
+    }
 }

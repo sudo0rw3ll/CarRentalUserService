@@ -111,6 +111,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserDto blockUser(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(String.format("Client with id %d not found", id)));
+
+        user.setIs_active(0);
+
+        return userMapper.UserToUserDto(userRepository.save(user));
+    }
+
+    @Override
+    public UserDto unblockUser(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(String.format("Client with id %d not found", id)));
+
+        user.setIs_active(1);
+
+        return userMapper.UserToUserDto(userRepository.save(user));
+    }
+
+    @Override
     public void deleteUserById(Long id) {
         userRepository.deleteById(id);
     }

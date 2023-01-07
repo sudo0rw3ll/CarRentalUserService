@@ -1,5 +1,7 @@
 package com.chan.sherlock.runner;
 
+import com.chan.sherlock.domain.Admin;
+import com.chan.sherlock.domain.Client;
 import com.chan.sherlock.domain.User;
 import com.chan.sherlock.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -18,10 +20,20 @@ public class TestDataRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        User admin = new User();
+        Admin admin = new Admin();
         admin.setEmail("admin@gmail.com");
         admin.setUsername("admin");
         admin.setPassword("admin");
         userRepository.save(admin);
+
+        Client client = new Client();
+        client.setEmail("vnikolic7821rn@raf.rs");
+        client.setFirst_name("Vid");
+        client.setLast_name("Nikolic");
+        client.setRental_period(0);
+        client.setUsername("nikolic_konjic");
+        client.setPassport_number("7754890006760705");
+        client.setPassword("nikolic123!!");
+        userRepository.save(client);
     }
 }

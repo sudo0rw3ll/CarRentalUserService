@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="TYPE", discriminatorType = DiscriminatorType.STRING)
-@Entity(name="`korisnik`")
+@Entity
 @Table(indexes = {@Index(columnList = "username", unique = true), @Index(columnList = "email", unique = true)})
 public class User {
 

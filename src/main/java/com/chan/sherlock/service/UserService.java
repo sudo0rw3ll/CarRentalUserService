@@ -16,5 +16,8 @@ public interface UserService {
     ClientDto createClient(ClientCreateDto clientCreateDto);
     ClientDto updateClient(Long id, ClientUpdateDto clientUpdateDto);
 
+    UserDto blockUser(Long id);
+    UserDto unblockUser(Long id);
+    
     void deleteUserById(Long id);
 }
