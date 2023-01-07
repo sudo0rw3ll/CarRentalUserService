@@ -8,8 +8,6 @@ public interface UserService {
 
     Page<UserDto> findAll(Pageable pageable);
 
-    UserDto add(UserCreateDto userCreateDto);
-
     TokenResponseDto login(TokenRequestDto tokenRequestDto);
 
     ManagerDto createManager(ManagerCreateDto managerCreateDto);

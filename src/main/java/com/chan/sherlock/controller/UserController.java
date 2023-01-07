@@ -1,20 +1,20 @@
 package com.chan.sherlock.controller;
 
-import com.chan.sherlock.dto.TokenRequestDto;
-import com.chan.sherlock.dto.TokenResponseDto;
-import com.chan.sherlock.dto.UserCreateDto;
-import com.chan.sherlock.dto.UserDto;
+import com.chan.sherlock.dto.*;
 import com.chan.sherlock.security.CheckSecurity;
 import com.chan.sherlock.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.models.Response;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/user")
@@ -40,10 +40,16 @@ public class UserController {
         return new ResponseEntity<>(userService.findAll(pageable), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Register user")
-    @PostMapping
-    public ResponseEntity<UserDto> saveUser(@RequestBody UserCreateDto userCreateDto){
-        return new ResponseEntity<>(userService.add(userCreateDto),HttpStatus.CREATED);
+    @ApiOperation(value = "Register client")
+    @PostMapping("/registerClient")
+    public ResponseEntity<ClientDto> saveClient(@RequestBody @Valid ClientCreateDto clientCreateDto){
+        return new ResponseEntity<>(userService.createClient(clientCreateDto), HttpStatus.CREATED);
+    }
+
+    @ApiOperation(value = "Register manager")
+    @PostMapping("/registerManager")
+    public ResponseEntity<ManagerDto> saveManager(@RequestBody @Valid ManagerCreateDto managerCreateDto){
+        return new ResponseEntity<>(userService.createManager(managerCreateDto), HttpStatus.CREATED);
     }
 
     @ApiOperation(value = "Login")
@@ -52,6 +58,18 @@ public class UserController {
         return new ResponseEntity<>(userService.login(tokenRequestDto),HttpStatus.OK);
     }
 
-    //ovde sam stao
+    @ApiOperation(value = "Update Client")
+    @PutMapping("/updateClient/{id}")
+    @CheckSecurity(userTypes={"ADMIN","MANAGER","USER"})
+    public ResponseEntity<ClientDto> updateClient(@RequestBody @Valid ClientUpdateDto clientUpdateDto, @PathVariable("id") Long id){
+        return new ResponseEntity<>(userService.updateClient(id, clientUpdateDto), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Update Manager")
+    @PutMapping("/updateManager/{id}")
+    @CheckSecurity(userTypes={"ADMIN","MANAGER","USER"})
+    public ResponseEntity<ManagerDto> updateManager(@RequestBody @Valid ManagerUpdateDto managerUpdateDto, @PathVariable("id") Long id){
+        return new ResponseEntity<>(userService.updateManager(id, managerUpdateDto), HttpStatus.OK);
+    }
 
 }

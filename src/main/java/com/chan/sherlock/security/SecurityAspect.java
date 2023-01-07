@@ -22,9 +22,9 @@ public class SecurityAspect {
 
     private TokenService tokenService;
 
-    private SecurityAspect(TokenService tokenService){this.tokenService = tokenService;}
+    public SecurityAspect(TokenService tokenService){this.tokenService = tokenService;}
 
-    @Around("@annotation(com.chan.sherlock.security.CheckSecurity")
+    @Around("@annotation(com.chan.sherlock.security.CheckSecurity)")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         Method method = methodSignature.getMethod();

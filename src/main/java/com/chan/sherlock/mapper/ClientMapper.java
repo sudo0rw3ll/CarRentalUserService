@@ -3,7 +3,9 @@ package com.chan.sherlock.mapper;
 import com.chan.sherlock.domain.Client;
 import com.chan.sherlock.dto.ClientCreateDto;
 import com.chan.sherlock.dto.ClientDto;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ClientMapper {
 
     public ClientDto clientToClientDto(Client client){

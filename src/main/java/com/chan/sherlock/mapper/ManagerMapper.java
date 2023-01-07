@@ -3,7 +3,9 @@ package com.chan.sherlock.mapper;
 import com.chan.sherlock.domain.Manager;
 import com.chan.sherlock.dto.ManagerCreateDto;
 import com.chan.sherlock.dto.ManagerDto;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ManagerMapper {
 
     public ManagerDto managerToManagerDto(Manager manager){

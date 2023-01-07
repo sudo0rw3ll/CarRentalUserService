@@ -3,7 +3,9 @@ package com.chan.sherlock.mapper;
 import com.chan.sherlock.domain.User;
 import com.chan.sherlock.dto.UserCreateDto;
 import com.chan.sherlock.dto.UserDto;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UserMapper {
 
     public UserDto UserToUserDto(User user){

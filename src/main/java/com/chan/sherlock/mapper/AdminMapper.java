@@ -3,7 +3,9 @@ package com.chan.sherlock.mapper;
 import com.chan.sherlock.domain.Admin;
 import com.chan.sherlock.dto.AdminCreateDto;
 import com.chan.sherlock.dto.AdminDto;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AdminMapper {
 
     public AdminDto adminDtoToAdmin(Admin admin){

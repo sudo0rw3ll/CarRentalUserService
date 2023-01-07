@@ -16,8 +16,7 @@ import io.jsonwebtoken.Jwts;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -44,13 +43,6 @@ public class UserServiceImpl implements UserService {
     public Page<UserDto> findAll(Pageable pageable) {
         return (Page<UserDto>) userRepository.findAll(pageable)
                 .map(userMapper::UserToUserDto);
-    }
-
-    @Override
-    public UserDto add(UserCreateDto userCreateDto) {
-        User user=userMapper.UserCreateDtoToUser(userCreateDto);
-        userRepository.save(user);
-        return userMapper.UserToUserDto(user);
     }
 
     @Override
@@ -112,6 +104,8 @@ public class UserServiceImpl implements UserService {
         client.setEmail(clientUpdateDto.getEmail());
         client.setPhone_number(clientUpdateDto.getPhone_number());
         client.setDate_of_birth(clientUpdateDto.getDate_of_birth());
+        client.setPassport_number(clientUpdateDto.getPassport_number());
+        client.setRental_period(clientUpdateDto.getRental_period());
 
         return clientMapper.clientToClientDto(userRepository.save(client));
     }
