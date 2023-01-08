@@ -3,7 +3,9 @@ package com.chan.sherlock.runner;
 import com.chan.sherlock.domain.Admin;
 import com.chan.sherlock.domain.Client;
 import com.chan.sherlock.domain.User;
+import com.chan.sherlock.domain.UserStatus;
 import com.chan.sherlock.repository.UserRepository;
+import com.chan.sherlock.repository.UserStatusRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -13,9 +15,11 @@ import org.springframework.stereotype.Component;
 public class TestDataRunner implements CommandLineRunner {
 
     private UserRepository userRepository;
+    private UserStatusRepository userStatusRepository;
 
-    public TestDataRunner(UserRepository userRepository) {
+    public TestDataRunner(UserRepository userRepository, UserStatusRepository userStatusRepository) {
         this.userRepository = userRepository;
+        this.userStatusRepository = userStatusRepository;
     }
 
     @Override
@@ -35,5 +39,12 @@ public class TestDataRunner implements CommandLineRunner {
         client.setPassport_number("7754890006760705");
         client.setPassword("nikolic123!!");
         userRepository.save(client);
+
+        UserStatus status1 = new UserStatus();
+        status1.setDiscount(10);
+        status1.setStatus_name("Silver");
+        status1.setMaxRentalPeriod(5);
+        status1.setMinRentalPeriod(1);
+        userStatusRepository.save(status1);
     }
 }

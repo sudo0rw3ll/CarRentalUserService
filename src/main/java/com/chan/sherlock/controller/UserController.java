@@ -91,4 +91,10 @@ public class UserController {
                                                @PathVariable("id") Long id){
         return new ResponseEntity<>(userService.unblockUser(id), HttpStatus.OK);
     }
+
+    @ApiOperation(value = "Calculate discount")
+    @GetMapping("/discount/{id}")
+    public ResponseEntity<DiscountDto> getDiscount(@PathVariable("id") Long user_id){
+        return new ResponseEntity<>(userService.findDiscount(user_id), HttpStatus.OK);
+    }
 }

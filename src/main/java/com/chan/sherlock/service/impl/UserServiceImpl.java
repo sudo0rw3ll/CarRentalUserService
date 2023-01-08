@@ -3,12 +3,14 @@ package com.chan.sherlock.service.impl;
 import com.chan.sherlock.domain.Client;
 import com.chan.sherlock.domain.Manager;
 import com.chan.sherlock.domain.User;
+import com.chan.sherlock.domain.UserStatus;
 import com.chan.sherlock.dto.*;
 import com.chan.sherlock.exception.NotFoundException;
 import com.chan.sherlock.mapper.ClientMapper;
 import com.chan.sherlock.mapper.ManagerMapper;
 import com.chan.sherlock.mapper.UserMapper;
 import com.chan.sherlock.repository.UserRepository;
+import com.chan.sherlock.repository.UserStatusRepository;
 import com.chan.sherlock.security.service.TokenService;
 import com.chan.sherlock.service.UserService;
 import io.jsonwebtoken.Claims;
@@ -18,6 +20,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.NoSuchElementException;
+
 
 @Service
 @Transactional
@@ -26,17 +31,20 @@ public class UserServiceImpl implements UserService {
 
     private TokenService tokenService;
     private UserRepository userRepository;
+    private UserStatusRepository userStatusRepository;
     private UserMapper userMapper;
     private ManagerMapper managerMapper; //dodao ja managerMapper
     private ClientMapper clientMapper; //dodao ja clientMapper
 
-    public UserServiceImpl(TokenService tokenService, UserRepository userRepository, UserMapper userMapper,
+    public UserServiceImpl(TokenService tokenService, UserStatusRepository userStatusRepository,
+                           UserRepository userRepository, UserMapper userMapper,
                            ManagerMapper managerMapper, ClientMapper clientMapper) {
         this.tokenService = tokenService;
         this.userRepository = userRepository;
         this.userMapper = userMapper;
         this.managerMapper = managerMapper; //dodao ja managerMapper
         this.clientMapper = clientMapper;
+        this.userStatusRepository = userStatusRepository;
     }
 
     @Override
@@ -128,6 +136,31 @@ public class UserServiceImpl implements UserService {
         user.setIs_active(1);
 
         return userMapper.UserToUserDto(userRepository.save(user));
+    }
+
+    @Override
+    public DiscountDto findDiscount(Long user_id) throws NoSuchElementException {
+        // Get user by user id
+        Client client = (Client) userRepository
+                .findById(user_id)
+                .orElseThrow(() -> new NotFoundException(String.format("User with user id %d not found", user_id)));
+
+        // Get all user statuses about available discounts
+        List<UserStatus> userStatuses = userStatusRepository.findAll();
+
+        Integer discount = null;
+
+        // Iterate through user statuses and find one that suits client's rental_period variable
+        // and then return result as discount dto
+        for(int i=0;i<userStatuses.size();i++){
+            if(userStatuses.get(i).getMaxRentalPeriod() >= client.getRental_period()
+                && userStatuses.get(i).getMinRentalPeriod() <= client.getRental_period()){
+                    discount = userStatuses.get(i).getDiscount();
+                    break;
+            }
+        }
+
+        return new DiscountDto(discount);
     }
 
     @Override

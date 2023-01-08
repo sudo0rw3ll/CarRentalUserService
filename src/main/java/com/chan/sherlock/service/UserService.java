@@ -18,6 +18,8 @@ public interface UserService {
 
     UserDto blockUser(Long id);
     UserDto unblockUser(Long id);
-    
+
+    DiscountDto findDiscount(Long user_id);
+
     void deleteUserById(Long id);
 }
